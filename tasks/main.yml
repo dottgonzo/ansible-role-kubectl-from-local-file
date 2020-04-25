@@ -2,15 +2,15 @@
 - name: Copy file with owner and permissions
   copy:
     src: "{{ local_file_path }}"
-    dest: "/tmp/{{ filename }}"
+    dest: "/tmp/{{ local_file_path  | basename }}"
     mode: "0400"
 
 - name: Create a Deployment by reading the definition from a local file
   k8s:
     state: present
-    src: "/tmp/{{ filename }}"
+    src: "/tmp/{{ local_file_path  | basename }}"
 
 - name: Remove file at end
   file:
-    path: "/tmp/{{ filename }}"
+    path: "/tmp/{{ local_file_path  | basename }}"
     state: absent
