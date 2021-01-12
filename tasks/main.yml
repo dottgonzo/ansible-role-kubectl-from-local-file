@@ -8,7 +8,7 @@
 
 - name: Create a Deployment by reading the definition from a local file
   k8s:
-    state: present
+    state: "{{ k8s_file_deploy_state  | default('present') }}"
     src: "/tmp/{{ local_file_path  | basename }}"
 
 - name: Remove file at end
